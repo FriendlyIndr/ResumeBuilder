@@ -1,6 +1,8 @@
 package com.example.resume_builder;
 
+import com.example.resume_builder.model.Project;
 import com.example.resume_builder.model.ResumeData;
+import com.example.resume_builder.model.WorkExp;
 import com.itextpdf.kernel.color.Color;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
@@ -19,6 +21,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.List;
 
 @Service
 public class PdfGenerationService {
@@ -53,14 +56,17 @@ public class PdfGenerationService {
             String title = data.getTitle();
             nestedTable1.addCell(new Cell().add(title).setBold().setBorder(Border.NO_BORDER));
             String description = data.getDescription();
-            nestedTable1.addCell(new Cell().add(new Paragraph("Description")).setBorder(Border.NO_BORDER));
+            nestedTable1.addCell(new Cell().add(new Paragraph(description)).setBorder(Border.NO_BORDER));
             table.addCell(new Cell().add(nestedTable1).setBorder(Border.NO_BORDER));
             Table nestedTable = new Table(new float[]{twocol});
 
-            nestedTable.addCell(new Cell().add("xyz@g.com").setBorder(Border.NO_BORDER).setBold().setTextAlignment(TextAlignment.RIGHT));
+            String email = data.getEmail();
+            nestedTable.addCell(new Cell().add(email).setBorder(Border.NO_BORDER).setBold().setTextAlignment(TextAlignment.RIGHT));
 
-            nestedTable.addCell(new Cell().add("8080808080").setBorder(Border.NO_BORDER).setBold().setTextAlignment(TextAlignment.RIGHT));
-            nestedTable.addCell(new Cell().add("Pune").setBorder(Border.NO_BORDER).setBold().setTextAlignment(TextAlignment.RIGHT));
+            String phone_number = data.getPhone();
+            nestedTable.addCell(new Cell().add(phone_number).setBorder(Border.NO_BORDER).setBold().setTextAlignment(TextAlignment.RIGHT));
+            String location = data.getLocation();
+            nestedTable.addCell(new Cell().add(location).setBorder(Border.NO_BORDER).setBold().setTextAlignment(TextAlignment.RIGHT));
             table.addCell(new Cell().add(nestedTable).setBorder(Border.NO_BORDER));
 
             document.add(table);
@@ -77,26 +83,41 @@ public class PdfGenerationService {
 
             workexp.addCell(new Cell().add("Work Experience").setBold().setFontSize(18).setBorder(Border.NO_BORDER));
 
-            //repetitive workexps
-            workexp.addCell(new Cell().add("Title1").setBold().setFontSize(15).setBorder(Border.NO_BORDER));
-            workexp.addCell(new Cell().add("Company1").setBorder(Border.NO_BORDER));
-            workexp.addCell(new Cell().add("tenure").setBorder(Border.NO_BORDER).setFontSize(10));
-            workexp.addCell(new Cell().add(new Paragraph("Description")).setBorder(Border.NO_BORDER));
-            workexp.addCell(new Cell().add(onesp).setBorder(Border.NO_BORDER));
+            List<WorkExp> workExps = data.getWorkExps();
 
-            workexp.addCell(new Cell().add("Title2").setBold().setFontSize(15).setBorder(Border.NO_BORDER));
-            workexp.addCell(new Cell().add("Company2").setBorder(Border.NO_BORDER));
-            workexp.addCell(new Cell().add("tenure").setBorder(Border.NO_BORDER).setFontSize(10));
-            workexp.addCell(new Cell().add(new Paragraph("Description")).setBorder(Border.NO_BORDER));
-            workexp.addCell(new Cell().add(onesp).setBorder(Border.NO_BORDER));
+            //repetitive workexps
+            for(int i = 0; i < workExps.size(); i++){
+                WorkExp workExp = workExps.get(i)
+                String we_title = workExp.getWE_title();
+                String we_company = workExp.getWE_company();
+                String we_tenure = workExp.getWE_tenure();
+                Paragraph we_description = new Paragraph(workExp.getWE_description());
+                workexp.addCell(new Cell().add(we_title).setBold().setFontSize(15).setBorder(Border.NO_BORDER));
+                workexp.addCell(new Cell().add(we_company).setBorder(Border.NO_BORDER));
+                workexp.addCell(new Cell().add(we_tenure).setBorder(Border.NO_BORDER).setFontSize(10));
+                workexp.addCell(new Cell().add(we_description).setBorder(Border.NO_BORDER));
+                workexp.addCell(new Cell().add(onesp).setBorder(Border.NO_BORDER));
+            }
 
             leftbody.addCell(new Cell().add(workexp));
 
+
+
             Table projects = new Table(new float[]{twocol150});
             projects.addCell(new Cell().add("Projects").setBold().setFontSize(18).setBorder(Border.NO_BORDER));
-            projects.addCell(new Cell().add("Project1").setBold().setFontSize(15).setBorder(Border.NO_BORDER));
-            projects.addCell(new Cell().add("Tools").setBorder(Border.NO_BORDER));
-            projects.addCell(new Cell().add(new Paragraph("Description")).setBorder(Border.NO_BORDER));
+
+            List<Project> Projects = data.getProjects();
+
+            for(int i = 0; i < Projects.size(); i++){
+                Project pr = Projects.get(i);
+                String pr_name = pr.getProj_name();
+                String pr_tools = pr.getTools();
+                Paragraph pr_description = new Paragraph(pr.getDescription());
+                projects.addCell(new Cell().add(pr_name).setBold().setFontSize(15).setBorder(Border.NO_BORDER));
+                projects.addCell(new Cell().add(pr_tools).setBorder(Border.NO_BORDER));
+                projects.addCell(new Cell().add(pr_description).setBorder(Border.NO_BORDER));
+            }
+
 
             leftbody.addCell(new Cell().add(projects));
 
