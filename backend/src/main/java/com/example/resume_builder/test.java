@@ -90,8 +90,10 @@ public class test {
         educations.addCell(new Cell().add("Education").setBold().setFontSize(18).setBorder(Border.NO_BORDER));
 
         //repetitive educations
+
         educations.addCell(new Cell().add("DegreeName1").setBold().setFontSize(15).setBorder(Border.NO_BORDER));
-        educations.addCell(new Cell().add("Period").setBorder(Border.NO_BORDER));
+        educations.addCell(new Cell().add("CollegeName1").setBold().setBorder(Border.NO_BORDER));
+        educations.addCell(new Cell().add("Period").setBorder(Border.NO_BORDER).setFontSize(10));
 
         rightbody.addCell(new Cell().add(educations));
 
