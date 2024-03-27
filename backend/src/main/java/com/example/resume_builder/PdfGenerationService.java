@@ -1,5 +1,6 @@
 package com.example.resume_builder;
 
+import com.example.resume_builder.model.Education;
 import com.example.resume_builder.model.Project;
 import com.example.resume_builder.model.ResumeData;
 import com.example.resume_builder.model.WorkExp;
@@ -36,8 +37,7 @@ public class PdfGenerationService {
 
 
 
-            String path = "test.pdf";
-            PdfWriter pdfWriter = new PdfWriter(path);
+            String path = "resume.pdf";
             PdfDocument pdfDocument = new PdfDocument(pdfWriter);
             Document document = new Document(pdfDocument);
 
@@ -79,67 +79,79 @@ public class PdfGenerationService {
 
             Table body = new Table(twocolumnWidth);
             Table leftbody = new Table(new float[]{twocol150});
-            Table workexp = new Table(new float[]{twocol150});
-
-            workexp.addCell(new Cell().add("Work Experience").setBold().setFontSize(18).setBorder(Border.NO_BORDER));
 
             List<WorkExp> workExps = data.getWorkExps();
+            if(workExps.size() > 0){
+                Table workexp = new Table(new float[]{twocol150});
+                workexp.addCell(new Cell().add("Work Experience").setBold().setFontSize(18).setBorder(Border.NO_BORDER));
 
-            //repetitive workexps
-            for(int i = 0; i < workExps.size(); i++){
-                WorkExp workExp = workExps.get(i)
-                String we_title = workExp.getWE_title();
-                String we_company = workExp.getWE_company();
-                String we_tenure = workExp.getWE_tenure();
-                Paragraph we_description = new Paragraph(workExp.getWE_description());
-                workexp.addCell(new Cell().add(we_title).setBold().setFontSize(15).setBorder(Border.NO_BORDER));
-                workexp.addCell(new Cell().add(we_company).setBorder(Border.NO_BORDER));
-                workexp.addCell(new Cell().add(we_tenure).setBorder(Border.NO_BORDER).setFontSize(10));
-                workexp.addCell(new Cell().add(we_description).setBorder(Border.NO_BORDER));
-                workexp.addCell(new Cell().add(onesp).setBorder(Border.NO_BORDER));
+
+                for(int i = 0; i < workExps.size(); i++){
+                    WorkExp workExp = workExps.get(i);
+                    String we_title = workExp.getWE_title();
+                    String we_company = workExp.getWE_company();
+                    String we_tenure = workExp.getWE_tenure();
+                    Paragraph we_description = new Paragraph(workExp.getWE_description());
+                    workexp.addCell(new Cell().add(we_title).setBold().setFontSize(15).setBorder(Border.NO_BORDER));
+                    workexp.addCell(new Cell().add(we_company).setBorder(Border.NO_BORDER));
+                    workexp.addCell(new Cell().add(we_tenure).setBorder(Border.NO_BORDER).setFontSize(10));
+                    workexp.addCell(new Cell().add(we_description).setBorder(Border.NO_BORDER));
+                    workexp.addCell(new Cell().add(onesp).setBorder(Border.NO_BORDER));
+                }
+                leftbody.addCell(new Cell().add(workexp));
             }
 
-            leftbody.addCell(new Cell().add(workexp));
-
-
-
-            Table projects = new Table(new float[]{twocol150});
-            projects.addCell(new Cell().add("Projects").setBold().setFontSize(18).setBorder(Border.NO_BORDER));
 
             List<Project> Projects = data.getProjects();
+            if(Projects.size() > 0){
+                Table projects = new Table(new float[]{twocol150});
+                projects.addCell(new Cell().add("Projects").setBold().setFontSize(18).setBorder(Border.NO_BORDER));
 
-            for(int i = 0; i < Projects.size(); i++){
-                Project pr = Projects.get(i);
-                String pr_name = pr.getProj_name();
-                String pr_tools = pr.getTools();
-                Paragraph pr_description = new Paragraph(pr.getDescription());
-                projects.addCell(new Cell().add(pr_name).setBold().setFontSize(15).setBorder(Border.NO_BORDER));
-                projects.addCell(new Cell().add(pr_tools).setBorder(Border.NO_BORDER));
-                projects.addCell(new Cell().add(pr_description).setBorder(Border.NO_BORDER));
+                for(int i = 0; i < Projects.size(); i++){
+                    Project pr = Projects.get(i);
+                    String pr_name = pr.getProj_name();
+                    String pr_tools = pr.getTools();
+                    Paragraph pr_description = new Paragraph(pr.getDescription());
+                    projects.addCell(new Cell().add(pr_name).setBold().setFontSize(15).setBorder(Border.NO_BORDER));
+                    projects.addCell(new Cell().add(pr_tools).setBorder(Border.NO_BORDER));
+                    projects.addCell(new Cell().add(pr_description).setBorder(Border.NO_BORDER));
+                }
+                leftbody.addCell(new Cell().add(projects));
             }
 
-
-            leftbody.addCell(new Cell().add(projects));
 
             body.addCell(new Cell().add(leftbody));
 
             Table rightbody = new Table(new float[]{twocol});
-            Table skills = new Table(new float[]{twocol});
-            skills.addCell(new Cell().add("Skills").setBold().setFontSize(18).setBorder(Border.NO_BORDER));
 
-            Table educations = new Table(new float[]{twocol});
-            educations.addCell(new Cell().add("Education").setBold().setFontSize(18).setBorder(Border.NO_BORDER));
+            List<Education> Educations = data.getEducations();
+            if(Educations.size() > 0){
+                Table educations = new Table(new float[]{twocol});
+                educations.addCell(new Cell().add("Education").setBold().setFontSize(18).setBorder(Border.NO_BORDER));
 
-            //repetitive educations
-            educations.addCell(new Cell().add("DegreeName1").setBold().setFontSize(15).setBorder(Border.NO_BORDER));
-            educations.addCell(new Cell().add("Period").setBorder(Border.NO_BORDER));
+                for(int i = 0; i < Educations.size(); i++){
+                    Education education = Educations.get(i);
+                    String de_name = education.getDeg_name();
+                    String college_name = education.getCollege_name();
+                    String period = education.getPeriod();
+                    educations.addCell(new Cell().add(de_name).setBold().setFontSize(15).setBorder(Border.NO_BORDER));
+                    educations.addCell(new Cell().add(college_name).setBold().setBorder(Border.NO_BORDER));
+                    educations.addCell(new Cell().add(period).setBorder(Border.NO_BORDER).setFontSize(10));
+                }
+                rightbody.addCell(new Cell().add(educations));
+            }
 
-            rightbody.addCell(new Cell().add(educations));
+            List<String> Skills = data.getSkills();
+            if(Skills.size() > 0){
+                Table skills = new Table(new float[]{twocol});
+                skills.addCell(new Cell().add("Skills").setBold().setFontSize(18).setBorder(Border.NO_BORDER));
+                for(int i = 0; i < Skills.size(); i++){
+                    skills.addCell(new Cell().add(Skills.get(i)).setBorder(Border.NO_BORDER));
+                }
+                rightbody.addCell(new Cell().add(skills));
+            }
 
-            rightbody.addCell(new Cell().add(skills));
             body.addCell(new Cell().add(rightbody));
-
-
             document.add(body);
 
 
