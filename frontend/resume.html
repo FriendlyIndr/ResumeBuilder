@@ -10,77 +10,83 @@
     <div class="container">
         <h1>Dev Resume Builder</h1>
 
-        <!-- Top Left Section -->
-        <div class="section">
-            <div class="section-header">Personal Information</div>
-            <div class="input-group">
-                <input type="text" placeholder="Name" name="name">
+        <form id="resumeForm">
+                <!-- Top Left Section -->
+            <div class="section">
+                <div class="section-header">Personal Information</div>
+                <div class="input-group">
+                    <input type="text" placeholder="Name" name="name">
+                </div>
+                <div class="input-group">
+                    <input type="text" placeholder="Title" name="title">
+                </div>
+                <div class="input-group">
+                    <textarea placeholder="Description" name="description"></textarea>
+                </div>
             </div>
-            <div class="input-group">
-                <input type="text" placeholder="Title" name="title">
-            </div>
-            <div class="input-group">
-                <textarea placeholder="Description" name="description"></textarea>
-            </div>
-        </div>
 
-        <!-- Top Right Section -->
-        <div class="section">
-            <div class="section-header">Contact Information</div>
-            <div class="input-group">
-                <input type="text" placeholder="Email" name="email">
+            <!-- Top Right Section -->
+            <div class="section">
+                <div class="section-header">Contact Information</div>
+                <div class="input-group">
+                    <input type="text" placeholder="Email" name="email">
+                </div>
+                <div class="input-group">
+                    <input type="text" placeholder="Phone" name="phone">
+                </div>
+                <div class="input-group">
+                    <input type="text" placeholder="Location" name="location">
+                </div>
+                <div class="input-group">
+                    <input type="text" placeholder="Link 1" name="link1">
+                </div>
+                <div class="input-group">
+                    <input type="text" placeholder="Link 2" name="link2">
+                </div>
             </div>
-            <div class="input-group">
-                <input type="text" placeholder="Phone" name="phone">
-            </div>
-            <div class="input-group">
-                <input type="text" placeholder="Location" name="location">
-            </div>
-            <div class="input-group">
-                <input type="text" placeholder="Link 1" name="link1">
-            </div>
-            <div class="input-group">
-                <input type="text" placeholder="Link 2" name="link2">
-            </div>
-        </div>
 
-        <!-- Middle Left Section (Work Experience) -->
-        <div class="section">
-            <div class="section-header">Work Experience</div>
-            <div class="work-experience">
-                <!-- Existing work experience items will be dynamically added here -->
+            <!-- Middle Left Section (Work Experience) -->
+            <div class="section">
+                <div class="section-header">Work Experience</div>
+                <div class="work-experience">
+                    <!-- Existing work experience items will be dynamically added here -->
+                </div>
+                <button class="add-work-experience">Add Work Experience</button>
             </div>
-            <button class="add-work-experience">Add Work Experience</button>
-        </div>
 
-        <!-- Middle Right Section (Skills) -->
-        <div class="section">
-            <div class="section-header">Skills</div>
-            <div class="skills">
-                <!-- Existing skills items will be dynamically added here -->
+            <!-- Middle Right Section (Skills) -->
+            <div class="section">
+                <div class="section-header">Skills</div>
+                <div class="skills">
+                    <!-- Existing skills items will be dynamically added here -->
+                </div>
+                <button class="add-skill">Add Skill</button>
             </div>
-            <button class="add-skill">Add Skill</button>
-        </div>
 
-        <!-- Bottom Left Section (Projects) -->
-        <div class="section">
-            <div class="section-header">Projects</div>
-            <div class="projects">
-                <!-- Existing project items will be dynamically added here -->
+            <!-- Bottom Left Section (Projects) -->
+            <div class="section">
+                <div class="section-header">Projects</div>
+                <div class="projects">
+                    <!-- Existing project items will be dynamically added here -->
+                </div>
+                <button class="add-project">Add Project</button>
             </div>
-            <button class="add-project">Add Project</button>
-        </div>
 
-        <!-- Bottom Right Section (Education) -->
-        <div class="section">
-            <div class="section-header">Education</div>
-            <div class="education">
-                <!-- Existing education items will be dynamically added here -->
+            <!-- Bottom Right Section (Education) -->
+            <div class="section">
+                <div class="section-header">Education</div>
+                <div class="education">
+                    <!-- Existing education items will be dynamically added here -->
+                </div>
+                <button class="add-education">Add Education</button>
             </div>
-            <button class="add-education">Add Education</button>
-        </div>
+        </form>
+        
 
-        <div class="btn">Save</div>
+
+        <div class="btn" id="saveButton">Save</div>
+
+        <embed type="application/pdf" id="pdfEmbed" width="100%" height="600px" style="display: none;">
     </div>
     <script src="script.js"></script>
 </body>
