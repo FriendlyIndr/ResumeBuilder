@@ -1,6 +1,8 @@
 package com.example.resume_builder.model;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class WorkExp {
         public String getWE_title() {
             return WE_title;
@@ -34,9 +36,13 @@ public class WorkExp {
             this.WE_description = WE_description;
         }
 
+        @JsonProperty("WE_title")
         private String WE_title;
+        @JsonProperty("WE_company")
         private String WE_company;
+        @JsonProperty("WE_tenure")
         private String WE_tenure;
+        @JsonProperty("WE_description")
         private String WE_description;
 
 
