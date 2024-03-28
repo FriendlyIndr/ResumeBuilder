@@ -1,5 +1,7 @@
 package com.example.resume_builder.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Project {
     public String getProj_name() {
         return proj_name;
@@ -25,7 +27,10 @@ public class Project {
         this.description = description;
     }
 
+    @JsonProperty("proj_name")
     private String proj_name;
+    @JsonProperty("tools")
     private String tools;
+    @JsonProperty("description")
     private String description;
 }
