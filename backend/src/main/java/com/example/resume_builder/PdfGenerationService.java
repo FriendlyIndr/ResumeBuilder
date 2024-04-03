@@ -36,8 +36,6 @@ public class PdfGenerationService {
             //make a template below with various commands
 
 
-
-            String path = "resume.pdf";
             PdfDocument pdfDocument = new PdfDocument(pdfWriter);
             Document document = new Document(pdfDocument);
 
