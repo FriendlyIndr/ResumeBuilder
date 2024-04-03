@@ -26,7 +26,7 @@ import java.util.List;
 
 @Service
 public class PdfGenerationService {
-    public byte[] generatePdf(@RequestBody ResumeData data) throws IOException{
+    public byte[] generatePdf(ResumeData data) throws IOException{
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         try (PdfWriter pdfWriter = new PdfWriter(outputStream);) {
 
