@@ -5,8 +5,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copy and build the app using Maven
-# Copy only the backend folder
-COPY backend .  
+COPY . .  
 
 RUN ./mvnw package -DskipTests
 
