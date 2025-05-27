@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to send resume data to backend server
     function sendResumeData(resumeData) {
-        fetch('http://localhost:8080/generate_pdf', {
+        fetch('https://resumebuilder-backend-6xg2.onrender.com/generate_pdf', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
