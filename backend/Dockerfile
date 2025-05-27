@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copy and build the app using Maven
-COPY backend/ .  
+COPY . .  
 
 # Make sure the Maven wrapper is executable
 RUN chmod +x mvnw
