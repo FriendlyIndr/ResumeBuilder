@@ -14,8 +14,17 @@ FROM openjdk:17-jdk-slim
 # Set working directory
 WORKDIR /app
 
+<<<<<<< HEAD
 # Copy the built JAR file from the builder stage
 COPY --from-builder /app/target/*.jar app.jar
+=======
+# Copy and build the app using Maven
+COPY . .  
+
+# Make sure the Maven wrapper is executable
+RUN chmod +x mvnw
+RUN ./mvnw package -DskipTests
+>>>>>>> b52f16bacc8def031a51913d76138a41854093f9
 
 # Run the app
 CMD ["java", "-jar", "app.jar"]
