@@ -15,7 +15,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copy the built JAR file from the builder stage
-COPY --from-builder /app/target/*.jar app.jar
+COPY --from=builder /app/target/*.jar app.jar
 
 # Run the app
 CMD ["java", "-jar", "app.jar"]
